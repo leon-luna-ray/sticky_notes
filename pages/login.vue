@@ -4,21 +4,11 @@ const client = useSupabaseClient();
 // State
 const email = ref('');
 const password = ref('');
-const isSignUp = ref(false);
 
 // Methods
 const login = async () => {
     console.log('login')
     const { user, error } = await client.auth.signIn({
-        email: email.value,
-        password: password.value,
-    })
-    console.log('user', user)
-    console.log('error', error)
-}
-const signUp = async () => {
-    console.log('sign up!')
-    const { user, error } = await client.auth.signUp({
         email: email.value,
         password: password.value,
     })
@@ -32,7 +22,7 @@ const signUp = async () => {
             <div class="title">
                 <h1>Existing User</h1>
             </div>
-            <form @submit.prevent="() => (isSignUp ? signUp() : login())">
+            <form @submit.prevent="() => (login())">
                 <div class="inner ">
                     <input type="email"
                     placeholder="Email"
